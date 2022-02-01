@@ -1,7 +1,10 @@
 import pandas as pd
 import os
 
-from params import FOLDER_PATH
+if __name__ == '__main__':
+    from params import FOLDER_PATH
+else:
+    from utils.params import FOLDER_PATH
 
 
 class FileHandler:
