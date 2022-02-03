@@ -13,7 +13,7 @@ class FileHandler:
         return [item for item in os.listdir(FOLDER_PATH) if item.endswith('.csv')]
 
     def get_data_from_csv(self, file_name):
-        return pd.read_csv(os.path.join(FOLDER_PATH, file_name))
+        return pd.read_csv(os.path.join(FOLDER_PATH, file_name)).fillna(0)
 
 
 if __name__ == '__main__':

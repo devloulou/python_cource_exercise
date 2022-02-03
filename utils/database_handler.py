@@ -24,7 +24,7 @@ class PostgresHandler:
             with con.cursor() as cur:
                 try:
                     # productionben, ne
-                    cur.execute(f"drop table {table_name}")
+                    cur.execute(f"drop table IF EXISTS {table_name}")
                 except (Exception, db.DatabaseError) as error:
                     return False, error
 
@@ -35,7 +35,10 @@ class PostgresHandler:
             with con.cursor() as cur:
                 try:
                     cur.executemany(insert_statement, data) # az adatnak [(),(),(),()]
+                    con.commit()
                 except (Exception, db.DatabaseError) as error:
+                    con.rollback()
+                    print(error)
                     return False, error
 
         return True
